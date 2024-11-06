@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyTodo</string>
+    <string name="item_entry_title">Add Todo</string>
+    <string name="edit_item_title">Todo Edit</string>
 </resources>
