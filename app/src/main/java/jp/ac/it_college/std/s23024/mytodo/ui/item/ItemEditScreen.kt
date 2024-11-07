@@ -16,7 +16,7 @@ object ItemEditDestination : NavigationDestination {
     override val route: String = "item_edit"
     override val titleRes: Int = R.string.edit_item_title
         const val itemIdArg = "itemId"
-        val routeWithArgd = "$route/{$itemIdArg}"
+        val routeWithArgs = "$route/{$itemIdArg}"
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

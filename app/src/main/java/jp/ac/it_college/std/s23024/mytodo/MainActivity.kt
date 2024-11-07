@@ -18,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import jp.ac.it_college.std.s23024.mytodo.deta.Item
+import jp.ac.it_college.std.s23024.mytodo.ui.TodoApp
 import jp.ac.it_college.std.s23024.mytodo.ui.theme.MyTodoTheme
 import kotlinx.coroutines.launch
 
@@ -32,27 +33,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val coroutineScope = rememberCoroutineScope()
-                    val app = application as TodoApplication
-                    val db = app.container.itemsRepository
-                    val item = Item(
-                        title = "牛乳を買う",
-                        description = "2カートン",
-                        done = true
-                    )
-                    Row(
-                        modifier = Modifier.safeDrawingPadding()
-                    ) {
-                        Button(
-                            onClick = {
-                                coroutineScope.launch {
-                                    db.insertItem(item)
-                                }
-                            }
-                        ) {
-                            Text(text = "データをインサート")
-                        }
-                    }
+                    TodoApp()
                 }
             }
         }
