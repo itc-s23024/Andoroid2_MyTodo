@@ -23,9 +23,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import jp.ac.it_college.std.s23024.mytodo.R
+import jp.ac.it_college.std.s23024.mytodo.deta.Item
+import jp.ac.it_college.std.s23024.mytodo.deta.ItemsRepository
 import jp.ac.it_college.std.s23024.mytodo.ui.TodoTopAppBar
 import jp.ac.it_college.std.s23024.mytodo.ui.navigation.NavigationDestination
 import jp.ac.it_college.std.s23024.mytodo.ui.theme.AppViewModelProvider
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 object HomeDestination : NavigationDestination {
     override val route: String = "home"
@@ -89,6 +93,24 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    val mockObject = object : ItemsRepository {
+        override fun getAllItemsStream(): Flow<List<Item>> =
+            MutableStateFlow(
+            listOf(
+                Item(1,"Item 1","Description 1",false),
+                Item(2,"Item 2","Description 2",true)
+            )
+        )
 
+        override fun getItemStream(id: Int): Flow<Item?> = MutableStateFlow(
+            Item(1,"Item 1","Description 1",false)
+        )
+
+        override suspend fun insertItem(item: Item) {}
+        override suspend fun deleteItem(item: Item) {}
+        override suspend fun updateItem(item: Item) {}
+    }
+    HomeScreen(
+        viewModel = HomeViewModel(mockObject)
+    )
 }

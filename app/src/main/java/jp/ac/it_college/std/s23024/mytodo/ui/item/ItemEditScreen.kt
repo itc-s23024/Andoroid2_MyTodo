@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import jp.ac.it_college.std.s23024.mytodo.R
 import jp.ac.it_college.std.s23024.mytodo.ui.TodoTopAppBar
 import jp.ac.it_college.std.s23024.mytodo.ui.navigation.NavigationDestination
+import jp.ac.it_college.std.s23024.mytodo.ui.theme.AppViewModelProvider
 
 object ItemEditDestination : NavigationDestination {
     override val route: String = "item_edit"
@@ -25,6 +27,9 @@ fun ItemEditScreen(
     modifier: Modifier = Modifier,
     navigateBack: () -> Unit = {},
     onNavigateUp: () -> Unit = {},
+    viewModel: ItemEditViewModel = viewModel(
+        factory = AppViewModelProvider.Factory
+    )
 ) {
     Scaffold(
         topBar = {
